@@ -1,0 +1,21 @@
+source '.git-completion.bash'
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+function parse_git_branch {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo " [${ref#refs/heads/}]"
+}
+
+PS1='\W$(parse_git_branch) \$ '
+alias pom='sleep 1200 && terminal-notifier -message "HEY" -title "Take a 5 minute break" && sleep 300 && terminal-notifier -message "OK" -title "Work for 20 minutes"'
+alias ls='ls -aGh'
+alias precompile_test_assets="RAILS_ENV=test time bundle exec rake assets:precompile"
+alias test_db_setup='bundle exec rake cruise:db_setup'
+alias renderlog='tail -f -n 1000 log/development.log | grep '\''Rendered'\'
+alias fs='foreman start'
+alias rs='bundle exec rails server'
+alias rc='bundle exec rails c'
+alias be='bundle exec'
+alias pa='ps aux'
+alias czechout='git checkout'
+alias gcom='git checkout master'
